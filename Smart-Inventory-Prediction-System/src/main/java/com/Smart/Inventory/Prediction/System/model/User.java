@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 @Data
 @Entity
@@ -16,17 +17,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String userName;
+    private String username;
     private String password;
     private String email;
     private LocalDateTime createdAt;
     private Boolean isActive;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private Boolean enabled;
+
+
 
     @OneToMany(mappedBy = "user")
     private List<Notification>  notifications;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Authority> authorities;
 
 
 }
