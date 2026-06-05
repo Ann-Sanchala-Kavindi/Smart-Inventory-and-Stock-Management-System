@@ -1,6 +1,8 @@
 package com.Smart.Inventory.Prediction.System.service.impl;
 
 import com.Smart.Inventory.Prediction.System.controller.request.CategoryRequest;
+import com.Smart.Inventory.Prediction.System.controller.response.CategoryResponse;
+import com.Smart.Inventory.Prediction.System.exception.NotFoundException;
 import com.Smart.Inventory.Prediction.System.model.Category;
 import com.Smart.Inventory.Prediction.System.repository.CategoryRepository;
 import com.Smart.Inventory.Prediction.System.service.CategoryService;
@@ -23,5 +25,21 @@ public class CategoryImpl implements CategoryService {
         category.setDescription(categoryRequest.getDescription());
 
         categoryRepository.save(category);
+    }
+
+    @Override
+    public CategoryResponse getById(Long categoryId) {
+
+        Category category=categoryRepository.findById(categoryId).orElseThrow(
+                ()-> new NotFoundException("Given Category Not Available!!!!")
+        );
+
+        CategoryResponse categoryResponse=new CategoryResponse();
+
+        categoryResponse.setName(category.getName());
+        categoryResponse.setDescription(category.getDescription());
+
+
+        return categoryResponse;
     }
 }

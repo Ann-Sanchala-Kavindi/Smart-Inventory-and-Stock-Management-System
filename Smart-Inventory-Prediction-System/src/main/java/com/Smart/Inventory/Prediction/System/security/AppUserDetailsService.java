@@ -20,14 +20,17 @@ public class AppUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("authentication user with username [{}]", username);
 
         User user = userRepository.findByUsername(username).orElseThrow(
-                () -> new UsernameNotFoundException("No user found with username  [" + username + "]")
+                () -> new UsernameNotFoundException("No user found with username [" + username + "]")
         );
-        System.out.println("user " + user.getAuthorities().size());
+
+        // ADD THIS - to see exactly what's coming from DB
+        System.out.println("Authorities from DB: " + user.getAuthorities());
+        user.getAuthorities().forEach(a -> System.out.println("Authority: " + a.getAuthority()));
 
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getUsername())

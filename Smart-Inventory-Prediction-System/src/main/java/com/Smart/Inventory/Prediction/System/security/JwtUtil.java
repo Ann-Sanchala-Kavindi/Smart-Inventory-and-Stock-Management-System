@@ -13,11 +13,10 @@ import java.util.Date;
 
 
 //jwt util for generate secret key
-
 @Component
 public class JwtUtil {
 
-    private static final String SECRET_KEY = "8Zz5tw0Ionm3XPZZfN0NOml3z9FMfmpgXwovR9fp6ryDIoGRM8EPHAB6iHsc0fb";
+    private static final String SECRET_KEY = "SmartInventorySystemSecretKey2024ForJWTTokenGenerationAndValidation";
     private final SecretKey key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
 
     public String generateToken(UserDetails userDetails) {
@@ -27,7 +26,7 @@ public class JwtUtil {
                 .claim("name", userDetails.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(Date.from(ZonedDateTime.now().plusYears(50).toInstant()))
-                .signWith(key)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 

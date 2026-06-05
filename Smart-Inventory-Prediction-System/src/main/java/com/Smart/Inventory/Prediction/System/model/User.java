@@ -3,6 +3,7 @@ package com.Smart.Inventory.Prediction.System.model;
 import com.Smart.Inventory.Prediction.System.model.Enum.Role;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,10 +28,12 @@ public class User {
 
 
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "user")
-    private List<Notification>  notifications;
+    private List<Notification> notifications;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Authority> authorities;
 
 

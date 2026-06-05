@@ -2,6 +2,7 @@ package com.Smart.Inventory.Prediction.System.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -14,6 +15,7 @@ public class Authority {
 
     private String authority;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
