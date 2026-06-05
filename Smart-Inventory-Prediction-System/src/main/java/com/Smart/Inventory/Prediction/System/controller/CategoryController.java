@@ -8,6 +8,8 @@ import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value="/categories")
 public class CategoryController {
@@ -28,9 +30,32 @@ public class CategoryController {
 
         return categoryService.getById(categoryId);
 
-
-
     }
+
+    @RolesAllowed({"ADMIN" , "MANAGER"})
+    @GetMapping
+    public List<CategoryResponse> getAll(){
+
+        return categoryService.getAll();
+    }
+
+    @RolesAllowed({"ADMIN","MANAGER"})
+    @PutMapping("/{id}")
+    public void updateById(@PathVariable ("id") Long categoryId,
+                           @RequestBody CategoryRequest categoryRequest){
+
+        categoryService.updateById(categoryId,categoryRequest);
+    }
+
+    @RolesAllowed({"ADMIN","MANAGER"})
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable ("id") Long categoryId){
+
+        categoryService.delete(categoryId);
+    }
+
+
+
 
 
 }

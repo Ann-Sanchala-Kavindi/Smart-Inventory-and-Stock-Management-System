@@ -38,7 +38,6 @@ public class DataInitializer implements CommandLineRunner {
             userRepository.save(adminUser);
         }
 
-
     }
 
 
