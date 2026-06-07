@@ -1,6 +1,7 @@
 package com.Smart.Inventory.Prediction.System.service.impl;
 
 import com.Smart.Inventory.Prediction.System.controller.request.ProductRequest;
+import com.Smart.Inventory.Prediction.System.controller.response.ProductResponse;
 import com.Smart.Inventory.Prediction.System.exception.NotFoundException;
 import com.Smart.Inventory.Prediction.System.model.Category;
 import com.Smart.Inventory.Prediction.System.model.Product;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ProductImpl implements ProductService {
@@ -34,14 +37,73 @@ public class ProductImpl implements ProductService {
 
         product.setCategories(category);
 
-        product.setId(productRequest.getId());
         product.setName(productRequest.getName());
         product.setPrice(productRequest.getPrice());
         product.setCreatedDate(LocalDateTime.now());
         product.setUpdatedDate(LocalDateTime.now());
-        product.setRecorderLevel(productRequest.getRecorderLevel());
+        product.setReOrderLevel(productRequest.getReOrderLevel());
 
         productRepository.save(product);
+
+    }
+
+    @Override
+    public ProductResponse getById(Long productId) {
+
+        Product product=productRepository.findById(productId).orElseThrow(
+                ()-> new NotFoundException("Given Product not available!!!!!")
+        );
+
+        ProductResponse productResponse=new ProductResponse();
+
+        productResponse.setName(product.getName());
+        productResponse.setPrice(product.getPrice());
+        productResponse.setReOrderLevel(productResponse.getReOrderLevel());
+
+        return productResponse;
+    }
+
+    @Override
+    public List<ProductResponse> getAll() {
+
+        List<Product> productList=productRepository.findAll();
+
+        List<ProductResponse> productResponseList=new ArrayList<>();
+
+        for(Product product:productList){
+
+            ProductResponse productResponse=new ProductResponse();
+
+            productResponse.setName(product.getName());
+            productResponse.setPrice(product.getPrice());
+            productResponse.setReOrderLevel(product.getReOrderLevel());
+
+            productResponseList.add(productResponse);
+        }
+
+
+        return productResponseList;
+    }
+
+    @Override
+    public void updateById(Long productId, ProductRequest productRequest) {
+
+        Product product=productRepository.findById(productId).orElseThrow(
+                ()-> new NotFoundException("Given Product not exist for update")
+        );
+
+        product.setName(productRequest.getName());
+        product.setPrice(productRequest.getPrice());
+        product.setReOrderLevel(productRequest.getReOrderLevel());
+
+        productRepository.save(product);
+
+    }
+
+    @Override
+    public void delete(Long productId) {
+
+        productRepository.deleteById(productId);
 
     }
 }

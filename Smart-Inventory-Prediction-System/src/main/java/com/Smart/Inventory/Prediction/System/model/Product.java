@@ -3,6 +3,7 @@ package com.Smart.Inventory.Prediction.System.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,7 +20,18 @@ public class Product {
     private Double price;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
-    private String recorderLevel;
+    private Double reOrderLevel;
+
+    @PrePersist
+    public void prePersist() {
+        createdDate = LocalDateTime.now();
+        updatedDate = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedDate = LocalDateTime.now();
+    }
 
     @ManyToOne
     private Category categories;
@@ -37,6 +49,9 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<Prediction> predictions;
+
+    @OneToOne(mappedBy = "product")
+    private Inventory inventory;
 
 
 

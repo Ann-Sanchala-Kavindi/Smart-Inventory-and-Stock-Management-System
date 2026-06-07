@@ -2,5 +2,8 @@ package com.Smart.Inventory.Prediction.System.model.Enum;
 
 public enum NotificationType {
 
-    LowStock,PredictionSystem,System
+    LOW_STOCK,
+    REORDER_ALERT,
+    PREDICTION_ALERT,
+    SYSTEM_ALERT
 }

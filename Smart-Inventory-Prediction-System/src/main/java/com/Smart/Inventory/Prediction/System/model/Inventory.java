@@ -17,4 +17,10 @@ public class Inventory {
     private Long quantityInStock;
     private LocalDateTime lastRestockedDate;
     private String warehouseLocation;
+    private Long reOrderLevel;
+
+
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 }
