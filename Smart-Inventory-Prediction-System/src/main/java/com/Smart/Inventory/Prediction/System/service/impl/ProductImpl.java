@@ -41,7 +41,7 @@ public class ProductImpl implements ProductService {
         product.setPrice(productRequest.getPrice());
         product.setCreatedDate(LocalDateTime.now());
         product.setUpdatedDate(LocalDateTime.now());
-        product.setReOrderLevel(productRequest.getReOrderLevel());
+
 
         productRepository.save(product);
 
@@ -58,7 +58,7 @@ public class ProductImpl implements ProductService {
 
         productResponse.setName(product.getName());
         productResponse.setPrice(product.getPrice());
-        productResponse.setReOrderLevel(productResponse.getReOrderLevel());
+
 
         return productResponse;
     }
@@ -76,7 +76,7 @@ public class ProductImpl implements ProductService {
 
             productResponse.setName(product.getName());
             productResponse.setPrice(product.getPrice());
-            productResponse.setReOrderLevel(product.getReOrderLevel());
+
 
             productResponseList.add(productResponse);
         }
@@ -94,7 +94,7 @@ public class ProductImpl implements ProductService {
 
         product.setName(productRequest.getName());
         product.setPrice(productRequest.getPrice());
-        product.setReOrderLevel(productRequest.getReOrderLevel());
+
 
         productRepository.save(product);
 

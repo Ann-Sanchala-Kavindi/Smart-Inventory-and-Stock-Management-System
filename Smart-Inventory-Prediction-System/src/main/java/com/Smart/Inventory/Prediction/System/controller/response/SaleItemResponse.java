@@ -3,6 +3,8 @@ package com.Smart.Inventory.Prediction.System.controller.response;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Builder
 @Data
 public class SaleItemResponse {
@@ -13,9 +15,9 @@ public class SaleItemResponse {
 
     private Long quantity;
 
-    private Double unitPrice;
+    private BigDecimal unitPrice;
 
-    private Double subTotal;
+    private BigDecimal subTotal;
 
 
 

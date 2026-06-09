@@ -4,6 +4,7 @@ import com.Smart.Inventory.Prediction.System.model.Enum.PaymentMethod;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class Sale {
     private Long id;
 
     private LocalDateTime saleDate;
-    private Double totalAmount;
+    private BigDecimal totalAmount;
 
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;

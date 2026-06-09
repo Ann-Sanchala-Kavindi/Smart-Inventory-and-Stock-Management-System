@@ -3,6 +3,7 @@ package com.Smart.Inventory.Prediction.System.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,10 +18,10 @@ public class Product {
     private Long id;
 
     private String name;
-    private Double price;
+    private BigDecimal price;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
-    private Double reOrderLevel;
+
 
     @PrePersist
     public void prePersist() {
