@@ -22,7 +22,16 @@ public class Sale {
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
-    @OneToMany(mappedBy = "sale")
+
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private User manager;
+
+    @OneToMany(
+            mappedBy = "sale",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<SaleItem> saleItems;
 
 }

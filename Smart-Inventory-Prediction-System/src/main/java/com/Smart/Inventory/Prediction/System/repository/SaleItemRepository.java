@@ -1,4 +1,9 @@
 package com.Smart.Inventory.Prediction.System.repository;
 
-public interface SaleItemRepository {
+import com.Smart.Inventory.Prediction.System.model.SaleItem;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SaleItemRepository extends JpaRepository<SaleItem,Long> {
+
+
 }

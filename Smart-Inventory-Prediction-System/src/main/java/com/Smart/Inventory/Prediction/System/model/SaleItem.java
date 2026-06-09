@@ -16,9 +16,12 @@ public class SaleItem {
     private Double unitPrice;
     private Double subTotal;
 
-    @ManyToOne
-    private Product product;
 
     @ManyToOne
+    @JoinColumn(name = "sale_id")
     private Sale sale;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 }

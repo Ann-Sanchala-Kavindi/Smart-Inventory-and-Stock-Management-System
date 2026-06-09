@@ -36,6 +36,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Authority> authorities;
 
+    @OneToMany(mappedBy = "manager")
+    private List<Sale> sales;
+
 
 }
 
